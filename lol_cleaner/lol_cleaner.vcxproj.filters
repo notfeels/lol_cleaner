@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="entry.cc" />
+    <ClCompile Include="process.cc" />
+    <ClCompile Include="files.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="process.hh" />
+    <ClInclude Include="inc.hh" />
+    <ClInclude Include="files.hh" />
+  </ItemGroup>
+</Project>
