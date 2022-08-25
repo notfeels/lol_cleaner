@@ -8,11 +8,11 @@ void files::remove( std::filesystem::path path_log )
 	if( !ec )
 	{
 		if( removed )
-			std::cout	<< "	[+] " << path_log << " removed.\n";	
+			std::cout << "	[+] " << path_log << " removed.\n";	
 	}
 	else
 	{
-		std::cout	<< "	[!] " << path_log << " failed to remove.\n";	
+		std::cout << "	[!] " << path_log << " failed to remove.\n";	
 	}
 		
 }
@@ -31,7 +31,7 @@ void files::clear_logs( )
 		"C:\\Riot Games\\Riot Client\\UX\\snapshot_blob.bin",
 		"C:\\Riot Games\\Riot Client\\UX\\v8_context_snapshot.bin",
 		"C:\\Riot Games\\Riot Client\\UX\\icudtl.dat",
-		"",
+		""
 	};
 
 	auto appdata = std::filesystem::temp_directory_path( ).parent_path( ).parent_path( );
