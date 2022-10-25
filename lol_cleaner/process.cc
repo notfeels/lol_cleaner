@@ -5,7 +5,7 @@ void process::close( std::string process_name )
 	PROCESSENTRY32 entry;
 	entry.dwSize = sizeof( PROCESSENTRY32 );
 
-	auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPALL, NULL );
+	const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPALL, NULL );
 
 	if( Process32First( snapshot, &entry ) )
 	{
@@ -13,7 +13,7 @@ void process::close( std::string process_name )
 		{
 			if( entry.szExeFile == process_name )
 			{
-				auto handle_process = OpenProcess( PROCESS_TERMINATE, FALSE, entry.th32ProcessID );
+				const auto handle_process = OpenProcess( PROCESS_TERMINATE, FALSE, entry.th32ProcessID );
 				TerminateProcess( handle_process, 9 );
 				CloseHandle( handle_process );
 				std::cout << "	[+] " << process_name << " closed.\n";

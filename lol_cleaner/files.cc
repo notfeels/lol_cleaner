@@ -3,7 +3,7 @@
 void files::remove( std::filesystem::path path_log )
 {
 	std::error_code ec;
-	auto removed = std::filesystem::remove_all( path_log, ec );
+	const auto removed = std::filesystem::remove_all( path_log, ec );
 
 	if( !ec )
 	{
@@ -14,7 +14,6 @@ void files::remove( std::filesystem::path path_log )
 	{
 		std::cout << "	[!] " << path_log << " failed to remove.\n";	
 	}
-		
 }
 
 void files::clear_logs( )
@@ -22,15 +21,15 @@ void files::clear_logs( )
 	std::cout << "[-] Deleting logs...\n";
 
 	std::filesystem::path league_folders[ ] = {
-		"C:\\ProgramData\\Riot Games",
-		"C:\\ProgramData\\Riot Games\\machine.cfg",
-		"C:\\Riot Games\\League of Legends\\Config",
-		"C:\\Riot Games\\League of Legends\\Logs",
-		"C:\\Riot Games\\League of Legends\\debug.log",
-		"C:\\Riot Games\\Riot Client\\UX\\natives_blob.bin",
-		"C:\\Riot Games\\Riot Client\\UX\\snapshot_blob.bin",
-		"C:\\Riot Games\\Riot Client\\UX\\v8_context_snapshot.bin",
-		"C:\\Riot Games\\Riot Client\\UX\\icudtl.dat",
+		R"(C:\ProgramData\Riot Games)",
+		R"(C:\ProgramData\Riot Games\machine.cfg)",
+		R"(C:\Riot Games\League of Legends\Config)",
+		R"(C:\Riot Games\League of Legends\Logs)",
+		R"(C:\Riot Games\League of Legends\debug.log)",
+		R"(C:\Riot Games\Riot Client\UX\natives_blob.bin)",
+		R"(C:\Riot Games\Riot Client\UX\snapshot_blob.bin)",
+		R"(C:\Riot Games\Riot Client\UX\v8_context_snapshot.bin)",
+		R"(C:\Riot Games\Riot Client\UX\icudtl.dat)",
 		""
 	};
 
@@ -39,7 +38,7 @@ void files::clear_logs( )
 	league_folders[ 9 ] += appdata;
 
 	for( int i = 0; i < ARRAYSIZE( league_folders ); i++ )
-		files::remove( league_folders [ i ] );
+		files::remove( league_folders[ i ] );
 
 	std::cout << "\n";
 }
