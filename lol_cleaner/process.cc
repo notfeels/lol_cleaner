@@ -7,7 +7,7 @@ void process::close( std::string process_name )
 
 	const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPALL, NULL );
 
-	for( Process32First( snapshot, &entry ); Process32Next(snapshot, &entry); )
+	for( Process32First( snapshot, &entry ); Process32Next( snapshot, &entry ); )
 	{
 		if( entry.szExeFile == process_name )
 		{
