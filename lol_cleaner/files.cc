@@ -1,6 +1,6 @@
 #include "inc.hh"
 
-void files::remove( std::filesystem::path path_log )
+void files::remove( const std::filesystem::path path_log )
 {
 	std::error_code ec;
 	const auto removed = std::filesystem::remove_all( path_log, ec );
@@ -20,7 +20,7 @@ void files::clear_logs( )
 {
 	std::cout << "[-] Deleting logs...\n";
 
-	std::filesystem::path league_folders[ ] = {
+	std::filesystem::path paths[ ] = {
 		R"(C:\ProgramData\Riot Games)",
 		R"(C:\ProgramData\Riot Games\machine.cfg)",
 		R"(C:\Riot Games\League of Legends\Config)",
@@ -35,10 +35,10 @@ void files::clear_logs( )
 
 	auto appdata = std::filesystem::temp_directory_path( ).parent_path( ).parent_path( );
 	appdata /= "Riot Games";
-	league_folders[ 9 ] += appdata;
+	paths[ 9 ] += appdata;
 
-	for( int i = 0; i < ARRAYSIZE( league_folders ); i++ )
-		files::remove( league_folders[ i ] );
+	for( const auto& path : paths )
+		files::remove( path );
 
 	std::cout << "\n";
 }

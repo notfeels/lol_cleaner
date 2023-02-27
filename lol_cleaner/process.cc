@@ -7,17 +7,14 @@ void process::close( std::string process_name )
 
 	const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPALL, NULL );
 
-	if( Process32First( snapshot, &entry ) )
+	for( Process32First( snapshot, &entry ); Process32Next(snapshot, &entry); )
 	{
-		while( Process32Next( snapshot, &entry ) )
+		if( entry.szExeFile == process_name )
 		{
-			if( entry.szExeFile == process_name )
-			{
-				const auto handle_process = OpenProcess( PROCESS_TERMINATE, FALSE, entry.th32ProcessID );
-				TerminateProcess( handle_process, 9 );
-				CloseHandle( handle_process );
-				std::cout << "	[+] " << process_name << " closed.\n";
-			}
+			const auto handle_process = OpenProcess( PROCESS_TERMINATE, FALSE, entry.th32ProcessID );
+			TerminateProcess( handle_process, 0 );
+			CloseHandle( handle_process );
+			std::cout << "	[+] " << process_name << " closed.\n";
 		}
 	}
 
@@ -28,16 +25,17 @@ void process::close_all(  )
 {
 	std::cout << "[-] Stopping Riot Games & League of Legends processes...\n";
 
-	std::string league_processes[ ] = {
+	std::string processes[ ] = {
 		"LeagueCrashHandler.exe",
 		"League of Legends.exe",
+		"LeagueClientUxRender.exe",
 		"LeagueClientUx.exe",
 		"LeagueClient.exe",
 		"RiotClientServices.exe"
 	};
 
-	for( int i = 0; i < ARRAYSIZE( league_processes ); i++ )
-		process::close( league_processes[ i ] );
+	for( const auto& process : processes )
+		process::close( process );
 
 	std::cout << "\n";
 
